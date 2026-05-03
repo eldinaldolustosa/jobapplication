@@ -1,0 +1,39 @@
+name: Project Board Automation
+
+on:
+  issues:
+    types: [opened, closed, reopened]
+  pull_request:
+    types: [opened, closed, converted_to_draft, ready_for_review]
+
+permissions:
+  issues: write
+  pull-requests: write
+  projects: write
+
+jobs:
+  add-to-project:
+    name: Add issue/PR to project board
+    runs-on: ubuntu-latest
+    # Requires PROJECT_NUMBER secret and project scope token (PROJECT_TOKEN)
+    # Setup: Settings → Secrets → Actions → New repository secret
+    #   PROJECT_NUMBER: the number shown in the project URL
+    #   PROJECT_TOKEN: PAT with project + read:project scopes
+    if: vars.PROJECT_NUMBER != ''
+    steps:
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/users/eldinaldolustosa/projects/${{ vars.PROJECT_NUMBER }}
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+
+  move-in-progress:
+    name: Move PR to In Progress
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' && vars.PROJECT_NUMBER != ''
+    steps:
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/users/eldinaldolustosa/projects/${{ vars.PROJECT_NUMBER }}
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          labeled: in-progress
+          label-operator: OR
