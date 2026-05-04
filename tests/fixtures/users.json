@@ -1,0 +1,30 @@
+{
+  "validUser": {
+    "name": "Eddie Lustosa",
+    "email": "eddie@jobapp.test",
+    "password": "Eddie1234"
+  },
+  "weakPassword": {
+    "name": "Weak User",
+    "email": "weak@jobapp.test",
+    "password": "abc"
+  },
+  "noNumberPassword": {
+    "name": "No Number",
+    "email": "nonumber@jobapp.test",
+    "password": "abcdefghij"
+  },
+  "invalidEmail": {
+    "name": "Bad Email",
+    "email": "not-an-email",
+    "password": "ValidPass1"
+  },
+  "missingName": {
+    "email": "noname@jobapp.test",
+    "password": "ValidPass1"
+  },
+  "missingEmail": {
+    "name": "No Email User",
+    "password": "ValidPass1"
+  }
+}
