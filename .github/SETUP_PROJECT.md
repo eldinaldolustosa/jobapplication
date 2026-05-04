@@ -38,7 +38,7 @@ done
 5. Clique em **+ Add item** e adicione as issues:
    - Issues #3, #4, #8, #9, #10 (Epics)
    - Issues #11, #12, #13, #14, #15, #16, #17 (User Stories)
-
+ 
 ### Estrutura do Kanban
 
 | Coluna | Issues |
