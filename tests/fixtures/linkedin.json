@@ -1,0 +1,50 @@
+{
+  "validCompany": {
+    "name": "Nubank",
+    "linkedinUrl": "https://www.linkedin.com/company/nubank",
+    "sector": "Fintech",
+    "size": "1000-5000",
+    "website": "https://nubank.com.br"
+  },
+  "anotherCompany": {
+    "name": "Itaú Unibanco",
+    "linkedinUrl": "https://www.linkedin.com/company/itau-unibanco",
+    "sector": "Banking"
+  },
+  "invalidCompanyUrl": {
+    "name": "Bad URL Corp",
+    "linkedinUrl": "https://www.instagram.com/badcorp"
+  },
+  "missingCompanyName": {
+    "linkedinUrl": "https://www.linkedin.com/company/test-co"
+  },
+  "missingCompanyUrl": {
+    "name": "Test Company"
+  },
+  "validRecruiter": {
+    "name": "Ana Recrutadora",
+    "linkedinUrl": "https://www.linkedin.com/in/ana-recrutadora",
+    "type": "Recrutador",
+    "title": "Senior Technical Recruiter"
+  },
+  "validCollaborator": {
+    "name": "Carlos Dev",
+    "linkedinUrl": "https://www.linkedin.com/in/carlos-dev",
+    "type": "Colaborador",
+    "title": "Senior Software Engineer"
+  },
+  "invalidContactUrl": {
+    "name": "Bad URL Contact",
+    "linkedinUrl": "https://www.instagram.com/badcontact",
+    "type": "Recrutador"
+  },
+  "invalidContactType": {
+    "name": "Wrong Type",
+    "linkedinUrl": "https://www.linkedin.com/in/wrongtype",
+    "type": "Manager"
+  },
+  "missingContactType": {
+    "name": "No Type",
+    "linkedinUrl": "https://www.linkedin.com/in/notype"
+  }
+}

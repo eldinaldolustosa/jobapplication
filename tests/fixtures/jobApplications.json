@@ -1,0 +1,62 @@
+{
+  "valid": {
+    "company": "Nubank",
+    "position": "Backend Engineer",
+    "description": "Node.js API development for financial services",
+    "salary": 15000,
+    "benefits": ["VR", "VT", "Plano de Saúde", "Stock Options"],
+    "applicationDate": "2026-05-01"
+  },
+  "minimal": {
+    "company": "Itaú",
+    "position": "Software Engineer",
+    "applicationDate": "2026-05-02"
+  },
+  "missingSalary": {
+    "company": "Bradesco",
+    "position": "Fullstack Developer",
+    "applicationDate": "2026-05-03"
+  },
+  "missingCompany": {
+    "position": "Developer",
+    "applicationDate": "2026-05-01"
+  },
+  "missingPosition": {
+    "company": "TechCorp",
+    "applicationDate": "2026-05-01"
+  },
+  "negativeSalary": {
+    "company": "BadCorp",
+    "position": "Dev",
+    "applicationDate": "2026-05-01",
+    "salary": -1000
+  },
+  "updatePayload": {
+    "salary": 18000,
+    "description": "Updated description after interview"
+  },
+  "stages": {
+    "feedback": {
+      "status": "Feedback",
+      "date": "2026-05-05",
+      "notes": "Retorno positivo do RH"
+    },
+    "interview": {
+      "status": "Entrevista",
+      "date": "2026-05-10",
+      "notes": "Entrevista com o gerente de engenharia"
+    },
+    "technicalInterview": {
+      "status": "Entrevista Técnica",
+      "date": "2026-05-15",
+      "notes": "Live coding com a equipe"
+    },
+    "invalidStatus": {
+      "status": "Reprovado",
+      "date": "2026-05-10"
+    },
+    "missingDate": {
+      "status": "Feedback"
+    }
+  }
+}
