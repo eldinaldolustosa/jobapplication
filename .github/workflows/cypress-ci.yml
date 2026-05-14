@@ -1,0 +1,74 @@
+name: Cypress — E2E Tests
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  cypress:
+    name: Cypress Headless
+    runs-on: ubuntu-latest
+
+    env:
+      PORT: 3000
+      NODE_ENV: test
+      BASE_URL: http://localhost:3000
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRES_IN: 24h
+      JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
+      JWT_REFRESH_EXPIRES_IN: 7d
+      UPLOAD_MAX_SIZE_MB: 5
+
+    steps:
+      # ── 1. Clonar repositório ────────────────────────────────────────────────
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ── 2. Container Node 20 ─────────────────────────────────────────────────
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ── 3. Instalar dependências ─────────────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ── 4. Iniciar aplicação em background ───────────────────────────────────
+      - name: Start server in background
+        run: node server.js &
+
+      # ── 5. Aguardar servidor estar no ar ─────────────────────────────────────
+      - name: Wait for server to be ready
+        run: |
+          echo "Aguardando http://localhost:3000/health ..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000/health > /dev/null; then
+              echo "✅ Servidor disponível após ${i} tentativa(s)."
+              break
+            fi
+            echo "  tentativa $i/30 — aguardando 2s..."
+            sleep 2
+          done
+          curl -sf http://localhost:3000/health \
+            || (echo "❌ Servidor não respondeu a tempo." && exit 1)
+
+      # ── 6. Rodar testes Cypress em headless mode ─────────────────────────────
+      - name: Run Cypress tests (headless)
+        run: npx cypress run --headless --browser electron
+
+      # ── 7. Publicar artefatos em caso de falha ───────────────────────────────
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: reports/cypress/screenshots
+          if-no-files-found: ignore
+
+      # ── 8. Finalizar ─────────────────────────────────────────────────────────
+      - name: Stop server
+        if: always()
+        run: pkill -f "node server.js" || true
